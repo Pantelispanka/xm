@@ -1,0 +1,13 @@
+services:
+
+  company-service:
+    build:
+      context: ./
+      dockerfile: ./Dockerfile.multi
+    environment:
+      - MONGO_URL=mongodb://mongo:27017/
+
+  redis:
+    image: mongo
+    ports:
+      - '27017:27017'
