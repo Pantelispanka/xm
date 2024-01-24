@@ -5,8 +5,6 @@ import (
 	"fmt"
 	"net/http"
 
-	companyHandler "xm-challenge/internal/http"
-
 	"github.com/gorilla/mux"
 )
 
@@ -31,8 +29,8 @@ func main() {
 	// r.HandleFunc("/company", mid.AuthMiddleware(httphandlers.UpdateUser)).Methods("PUT")
 
 	r.HandleFunc("/company", companyHandler.GetCompanyHandler).Methods("GET").Queries("id", "{id}")
-	r.HandleFunc("/company", companyHandler.PatchCompanyHandler).Methods("PATCH")
-	r.HandleFunc("/company", companyHandler.CreateCompanyHandler).Methods("POST")
-	r.HandleFunc("/company", companyHandler.DeleteCompanyHandler).Methods("DELETE")
+	r.HandleFunc("/company", mid.AuthMiddleware(companyHandler.PatchCompanyHandler)).Methods("PATCH")
+	r.HandleFunc("/company", mid.AuthMiddleware(companyHandler.CreateCompanyHandler)).Methods("POST")
+	r.HandleFunc("/company", mid.AuthMiddleware(companyHandler.DeleteCompanyHandler)).Methods("DELETE")
 
 }

@@ -9,5 +9,5 @@ type Config struct {
 }
 
 func (c *Config) config() {
-	config.mongoUrl = os.Getenv("MONGOURL")
+	config.mongoUrl = os.Getenv("MONGO_URL")
 }
